@@ -26,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val ttsData = listOf(
+        "1. 南韓一年一度音樂盛會「金唱片獎（Golden Disc Awards）」被譽為韓國葛萊美獎，今（6）日來到第38屆",
+        "2. 中國46歲人氣演員黃曉明與前妻Angelababy（楊穎），2022年1月宣布離婚震撼演藝圈，他隨後和企業家網紅葉珂爆出新戀情",
+        "3. 今年金唱片獎主持人為ASTRO成員車銀優跟成詩京，出席的藝人包含：SEVENTEEN、NewJeans、少女時代Tiffany Young（蒂芬妮）等"
+    )
+    private var currentIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,11 +41,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        val tvContent = findViewById<TextView>(R.id.tv_content)
+        findViewById<TextView>(R.id.tv_content_1).text = ttsData[0]
+        findViewById<TextView>(R.id.tv_content_2).text = ttsData[1]
+        findViewById<TextView>(R.id.tv_content_3).text = ttsData[2]
+
         // 啟用TTS
         findViewById<View>(R.id.btn_tts_play).setOnClickListener(View.OnClickListener {
-            val utteranceId = "uniqueId" // 設置一個獨特的ID
-            textToSpeech?.speak(tvContent.text, TextToSpeech.QUEUE_FLUSH, null, utteranceId)
+            for(index in currentIndex until ttsData.size){
+                textToSpeech?.speak(ttsData[index], TextToSpeech.QUEUE_ADD, null, index.toString())
+            }
+
         })
         // 關閉TTS
         findViewById<View>(R.id.btn_tts_stop).setOnClickListener(View.OnClickListener {
@@ -51,17 +63,16 @@ class MainActivity : AppCompatActivity() {
         // 設置語音合成進度監聽器
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             textToSpeech?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                override fun onStart(utteranceId: String?) {
-                    // 語音開始合成時的回調
+                override fun onStart(utteranceId: String) {
+                    Log.d("TTS", "onStart: $utteranceId")
+                    currentIndex = utteranceId.toInt()
                 }
 
-                override fun onDone(utteranceId: String?) {
-                    if (utteranceId == "uniqueId") {
-                        Log.d("TTS", "TTS playback completed")
-                    }
+                override fun onDone(utteranceId: String) {
+                    Log.d("TTS", "onDone: $utteranceId")
                 }
 
-                override fun onError(utteranceId: String?) {
+                override fun onError(utteranceId: String) {
                     // 語音合成錯誤時的回調
                 }
             })

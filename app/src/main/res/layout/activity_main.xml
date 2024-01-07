@@ -8,16 +8,42 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/tv_content_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="4dp"
         android:padding="16dp"
-        android:text="Hello, welcome to Text-to-Speech example in Kotlin.2023年8月時，41歲的潛水教練吳先生意外遭漁船絞斷左小腿，當下機警使用二級管綁住肢端止血、把學員帶回岸邊，並經基隆長庚醫院救治後，目前已經能正常行走。"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1. 南韓一年一度音樂盛會「金唱片獎（Golden Disc Awards）」被譽為韓國葛萊美獎，今（6）日來到第38屆" />
+
+    <TextView
+        android:id="@+id/tv_content_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:padding="16dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_1"
+        tools:text="2. 中國46歲人氣演員黃曉明與前妻Angelababy（楊穎），2022年1月宣布離婚震撼演藝圈，他隨後和企業家網紅葉珂爆出新戀情" />
+
+    <TextView
+        android:id="@+id/tv_content_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:padding="16dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_2"
+        tools:text="3. 今年金唱片獎主持人為ASTRO成員車銀優跟成詩京，出席的藝人包含：SEVENTEEN、NewJeans、少女時代Tiffany Young（蒂芬妮）等" />
+
 
     <Button
         android:id="@+id/btn_tts_play"
@@ -25,13 +51,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
         android:text="TTS Play"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_content_3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_tts_stop"
