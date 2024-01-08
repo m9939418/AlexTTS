@@ -14,12 +14,22 @@ class MainActivity : AppCompatActivity() {
     private var textToSpeech: TextToSpeech? = null
     private val textOnInitListener = TextToSpeech.OnInitListener { status ->
         if (status == TextToSpeech.SUCCESS) {
-            val result: Int
-            val locale = Locale.getDefault()
+//            val result: Int
+//            val locale = Locale.getDefault()
             // 設置語言，如果語言不可用，則使用默認語言
-            result = textToSpeech?.setLanguage(locale) ?: TextToSpeech.LANG_MISSING_DATA
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TextToSpeech", "Language is not available.")
+//            result = textToSpeech?.setLanguage(locale) ?: TextToSpeech.LANG_MISSING_DATA
+//            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+//                Log.e("TextToSpeech", "Language is not available.")
+//            }
+            // 設置語言為『 英文 』
+            val englishResult = textToSpeech?.setLanguage(Locale.ENGLISH)
+            if (englishResult == TextToSpeech.LANG_MISSING_DATA || englishResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TextToSpeech", "English language is not available.")
+            }
+            // 設置語言為『 繁體中文（台灣）』
+            val chineseResult = textToSpeech?.setLanguage(Locale("zh", "TW"))
+            if (chineseResult == TextToSpeech.LANG_MISSING_DATA || chineseResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TextToSpeech", "未支援繁體中文（台灣）！")
             }
         } else {
             Log.e("TextToSpeech", "Initialization failed.")
